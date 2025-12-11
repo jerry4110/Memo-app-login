@@ -1,0 +1,25 @@
+.memo-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.memo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+.memo-card.editing {
+  border: 2px solid #51cf66;
+  box-shadow: 0 12px 30px rgba(81, 207, 102, 0.2) !important;
+  background: #f7fff8;
+}
+
+.memo-content-preview {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+  min-height: 80px;
+}
+
+.memo-container .alert {
+  border-radius: 12px;
+}

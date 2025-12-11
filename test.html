@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABC Company - 기업 소개</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      color: #1f2933;
+      background-color: #f5f7fa;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #2563eb;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.2rem;
+      color: #4b5563;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #2563eb;
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 4.5rem 0 4rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("https://img.freepik.com/free-photo/low-angle-view-skyscrapers_1359-1044.jpg?semt=ais_incoming&w=740&q=80");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5; /* 50% 투명도 */
+      z-index: -2;
+      transform: scale(1.03);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.82),
+        rgba(15, 23, 42, 0.55)
+      );
+      z-index: -1;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      color: #e5e7eb;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #e0edff;
+      color: #2563eb;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      margin-right: 0.35rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+      color: #f9fafb;
+    }
+
+    .hero-title span {
+      color: #2563eb;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: #e5e7eb;
+      max-width: 480px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.5rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      border-color: #d1d5db;
+      color: #374151;
+    }
+
+    .btn-outline:hover {
+      background: #f3f4f6;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: #cbd5f5;
+    }
+
+    .hero-meta strong {
+      font-size: 1rem;
+      color: #ffffff;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top left, #eff6ff, #ffffff);
+      border-radius: 1.5rem;
+      padding: 1.75rem;
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .hero-card-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #6b7280;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .hero-stat-item {
+      padding: 0.75rem;
+      border-radius: 1rem;
+      background: rgba(248, 250, 252, 0.95);
+    }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-stat-value {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    /* Sections */
+    section {
+      padding: 3.5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: #6b7280;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: #4b5563;
+      margin-bottom: 1rem;
+    }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .about-highlight {
+      padding: 0.9rem 1rem;
+      border-radius: 1rem;
+      background: #ffffff;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    .about-highlight strong {
+      display: block;
+      font-size: 0.9rem;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .about-card {
+      border-radius: 1.5rem;
+      background: linear-gradient(145deg, #1d4ed8, #0f172a);
+      color: #e5e7eb;
+      padding: 1.75rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+    }
+
+    .about-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .about-card p {
+      font-size: 0.9rem;
+      color: #c7d2fe;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .about-tag {
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(191, 219, 254, 0.7);
+      color: #e0f2fe;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: #ffffff;
+      border-radius: 1.25rem;
+      padding: 1.4rem 1.4rem 1.3rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .service-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .service-icon.blue {
+      background: #e0edff;
+      color: #2563eb;
+    }
+
+    .service-icon.green {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    .service-icon.amber {
+      background: #fef9c3;
+      color: #d97706;
+    }
+
+    .service-title {
+      font-weight: 600;
+      color: #111827;
+      margin-top: 0.2rem;
+    }
+
+    .service-desc {
+      font-size: 0.89rem;
+      color: #6b7280;
+    }
+
+    .service-meta {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: auto;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 1.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #4b5563;
+    }
+
+    input,
+    textarea,
+    select {
+      border-radius: 0.9rem;
+      border: 1px solid #d1d5db;
+      padding: 0.6rem 0.65rem;
+      font-size: 0.88rem;
+      font-family: inherit;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+      background-color: #f9fafb;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #2563eb;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.35);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contact-info {
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .contact-info-item {
+      margin-top: 1rem;
+    }
+
+    .contact-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-value {
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .contact-note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem 0 1.5rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.3);
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+    }
+
+    .footer-links a:hover {
+      color: #6b7280;
+    }
+
+    /* Utilities */
+    .mt-1 {
+      margin-top: 0.25rem;
+    }
+
+    .mt-2 {
+      margin-top: 0.5rem;
+    }
+
+    .mt-3 {
+      margin-top: 0.75rem;
+    }
+
+    .mt-4 {
+      margin-top: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-inner,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 3.5rem;
+      }
+
+      .hero-inner {
+        gap: 2rem;
+      }
+
+      .hero-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links {
+        display: none;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-card {
+        padding: 1.25rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .services-grid,
+      .about-highlights,
+      .hero-stats {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding: 3rem 0 3rem;
+      }
+
+      .form-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .footer-inner {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">ABC COMPANY</div>
+        <div class="nav-links">
+          <a href="#about">회사소개</a>
+          <a href="#services">서비스</a>
+          <a href="#contact">문의하기</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div>
+            <div class="badge">
+              <span class="badge-dot"></span>
+              신뢰받는 디지털 파트너
+            </div>
+            <h1 class="hero-title">
+              기업의 성장을 이끄는<br />
+              <span>디지털 솔루션 파트너</span>
+            </h1>
+            <p class="hero-subtitle">
+              ABC Company는 전략 수립부터 서비스 운영까지, 비즈니스 가치에 집중한 디지털 솔루션을 제공합니다.
+              빠르게 변하는 시장 속에서도, 고객사의 지속 가능한 성장을 함께 설계합니다.
+            </p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn-primary">상담 요청하기</a>
+              <a href="#services" class="btn-outline">서비스 살펴보기</a>
+            </div>
+            <div class="hero-meta">
+              <div>
+                <strong>120+</strong><br />
+                프로젝트 경험
+              </div>
+              <div>
+                <strong>50+</strong><br />
+                다양한 산업 분야
+              </div>
+              <div>
+                <strong>96%</strong><br />
+                재구매/재계약 비율
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="회사 주요 지표">
+            <div class="hero-card-title">Core Metrics</div>
+            <p style="font-size: 0.88rem; color: #6b7280;">
+              데이터와 경험을 바탕으로, 안정적인 실행과 성과 중심의 결과를 만들어 갑니다.
+            </p>
+            <div class="hero-stats">
+              <div class="hero-stat-item">
+                <div class="hero-stat-label">설립</div>
+                <div class="hero-stat-value">2015</div>
+                <div class="mt-1" style="font-size: 0.78rem; color: #9ca3af;">
+                  10년 가까운 운영 노하우
+                </div>
+              </div>
+              <div class="hero-stat-item">
+                <div class="hero-stat-label">전문가 인력</div>
+                <div class="hero-stat-value">80+</div>
+                <div class="mt-1" style="font-size: 0.78rem; color: #9ca3af;">
+                  전략 · 디자인 · 개발 · 데이터
+                </div>
+              </div>
+              <div class="hero-stat-item">
+                <div class="hero-stat-label">주요 분야</div>
+                <div class="hero-stat-value">4</div>
+                <div class="mt-1" style="font-size: 0.78rem; color: #9ca3af;">
+                  플랫폼 · 이커머스 · B2B · 브랜드
+                </div>
+              </div>
+              <div class="hero-stat-item">
+                <div class="hero-stat-label">고객 만족도</div>
+                <div class="hero-stat-value">4.8</div>
+                <div class="mt-1" style="font-size: 0.78rem; color: #9ca3af;">
+                  5점 만점 기준 내부 설문
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">ABOUT ABC COMPANY</div>
+          <h2 class="section-title">디지털 전환의 여정을 함께합니다</h2>
+          <p class="section-subtitle">
+            ABC Company는 복잡한 기술 용어보다, 사람과 비즈니스에 집중합니다.
+            고객사의 목표와 상황을 깊이 이해하고, 가장 현실적인 디지털 전략과 실행 방안을 제안합니다.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              우리는 단순한 외주 개발사가 아닌, 장기적인 관점에서 함께 성장하는 파트너를 지향합니다.
+              초기 컨설팅부터 서비스 론칭, 운영 고도화까지 전 과정에 참여하며,
+              비즈니스 임팩트를 만드는 데 집중합니다.
+            </p>
+            <p>
+              각 프로젝트는 전략, 디자인, 개발, 데이터 전문가로 구성된 전담 팀이 수행합니다.
+              팀 간의 유기적인 협업을 통해, 빠르게 실행하면서도 완성도를 놓치지 않습니다.
+            </p>
+
+            <div class="about-highlights">
+              <div class="about-highlight">
+                <strong>비즈니스 이해 중심</strong>
+                기술보다 먼저, 비즈니스 모델과 고객 경험을 이해하는 것에서 프로젝트가 시작됩니다.
+              </div>
+              <div class="about-highlight">
+                <strong>엔드투엔드 지원</strong>
+                전략 수립부터 UI/UX, 개발, 운영까지, 디지털 전환의 전 과정을 원스톱으로 제공합니다.
+              </div>
+              <div class="about-highlight">
+                <strong>데이터 기반 의사결정</strong>
+                감이 아닌 데이터에 기반한 가설 검증과 지표 관리로, 성과 중심의 실행을 돕습니다.
+              </div>
+              <div class="about-highlight">
+                <strong>장기 파트너십</strong>
+                단발성이 아닌, 장기적인 관점의 운영·고도화 로드맵을 함께 설계합니다.
+              </div>
+            </div>
+          </div>
+
+          <aside class="about-card" aria-label="회사 미션과 키워드">
+            <h3>Our Mission</h3>
+            <p>
+              “기술을 통해 사람과 비즈니스를 더 가깝게 만드는 것”
+              ABC Company가 추구하는 디지털 전환의 방향입니다.
+            </p>
+            <div class="about-tags">
+              <span class="about-tag">디지털 전략 컨설팅</span>
+              <span class="about-tag">서비스 기획·UX</span>
+              <span class="about-tag">웹·모바일 개발</span>
+              <span class="about-tag">데이터 분석</span>
+              <span class="about-tag">지속적 운영/고도화</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">WHAT WE DO</div>
+          <h2 class="section-title">ABC Company의 주요 서비스</h2>
+          <p class="section-subtitle">
+            디지털 비즈니스를 시작하거나, 한 단계 더 성장시키고 싶으시다면
+            아래와 같은 영역에서 ABC Company의 경험을 활용해 보세요.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon blue" aria-hidden="true">✔</div>
+            <div class="service-title">디지털 전략 & 컨설팅</div>
+            <p class="service-desc">
+              시장 분석, 고객 여정 설계, 서비스 로드맵 수립 등 비즈니스 목표에 맞춘
+              디지털 전략을 함께 정의합니다.
+            </p>
+            <div class="service-meta">
+              - 시장/경쟁 분석<br />
+              - 디지털 전환 로드맵<br />
+              - KPI 설계 및 성과 관리
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon green" aria-hidden="true">◆</div>
+            <div class="service-title">UX/UI 디자인 & 프로토타이핑</div>
+            <p class="service-desc">
+              실제 사용자 리서치를 기반으로, 직관적이면서도 브랜드 아이덴티티를 반영한
+              서비스 경험을 설계합니다.
+            </p>
+            <div class="service-meta">
+              - UX 리서치·워크숍<br />
+              - 와이어프레임·프로토타입<br />
+              - 디자인 시스템 구축
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon amber" aria-hidden="true">★</div>
+            <div class="service-title">웹/모바일 개발 & 운영</div>
+            <p class="service-desc">
+              안정적인 아키텍처 설계부터 개발, 클라우드 인프라, 런칭 이후 운영·고도화까지
+              전 과정에 함께합니다.
+            </p>
+            <div class="service-meta">
+              - 웹·모바일 서비스 개발<br />
+              - 클라우드 인프라 구성<br />
+              - 모니터링·지표 기반 고도화
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">CONTACT</div>
+          <h2 class="section-title">프로젝트를 함께 이야기해 볼까요?</h2>
+          <p class="section-subtitle">
+            아래 정보를 간단히 남겨주시면 담당자가 1~2 영업일 이내에 연락을 드립니다.
+            아직 구체적인 기획이 없어도 괜찮습니다.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <section class="contact-card" aria-label="문의 양식">
+            <h3 style="font-size: 1rem; color: #111827;">프로젝트 문의</h3>
+            <p class="mt-2" style="font-size: 0.88rem; color: #6b7280;">
+              가능한 범위에서 현재 상황과 고민, 예상 일정 등을 알려주시면
+              보다 정확한 상담이 가능합니다.
+            </p>
+
+            <form class="mt-3" onsubmit="event.preventDefault(); alert('실제 전송 기능은 연결되어 있지 않습니다.');">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">담당자 성함</label>
+                  <input id="name" type="text" placeholder="홍길동" />
+                </div>
+                <div class="form-group">
+                  <label for="company">회사명</label>
+                  <input id="company" type="text" placeholder="ABC Company" />
+                </div>
+                <div class="form-group">
+                  <label for="email">이메일</label>
+                  <input id="email" type="email" placeholder="you@example.com" />
+                </div>
+                <div class="form-group">
+                  <label for="phone">연락처</label>
+                  <input id="phone" type="tel" placeholder="010-0000-0000" />
+                </div>
+                <div class="form-group full">
+                  <label for="type">문의 유형</label>
+                  <select id="type">
+                    <option value="">선택해주세요</option>
+                    <option value="strategy">디지털 전략/컨설팅</option>
+                    <option value="uxui">UX/UI & 서비스 기획</option>
+                    <option value="development">웹/모바일 개발</option>
+                    <option value="etc">기타 협업 제안</option>
+                  </select>
+                </div>
+                <div class="form-group full">
+                  <label for="message">프로젝트/문의 내용</label>
+                  <textarea id="message" placeholder="필요하신 내용이나 고민하고 계신 방향을 자유롭게 적어주세요."></textarea>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-primary mt-4" style="width: 100%; justify-content: center;">
+                문의 내용 보내기
+              </button>
+            </form>
+          </section>
+
+          <aside class="contact-info" aria-label="연락처 및 회사 정보">
+            <div class="contact-info-item">
+              <div class="contact-label">EMAIL</div>
+              <div class="contact-value">contact@abc-company.co.kr</div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-label">PHONE</div>
+              <div class="contact-value">02-123-4567</div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-label">ADDRESS</div>
+              <div class="contact-value">
+                서울시 ○○구 ○○로 123, ABC타워 8층
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-label">BUSINESS HOURS</div>
+              <div class="contact-value">
+                평일 09:30 ~ 18:30 (주말·공휴일 휴무)
+              </div>
+            </div>
+            <p class="contact-note">
+              제안서, 포트폴리오, 파트너십 관련 문의는 상단 이메일 주소로 보내주시면
+              내부 검토 후 별도로 연락을 드립니다.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>© <span id="year"></span> ABC Company. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="#about">회사소개</a>
+          <a href="#services">서비스</a>
+          <a href="#contact">문의하기</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 연도 자동 표기
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+

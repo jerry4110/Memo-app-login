@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.game-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.score, .selected-sum {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #555;
+}
+
+.score span, .selected-sum span {
+    color: #667eea;
+    font-size: 1.3em;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    position: relative;
+    min-height: 400px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.apple {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    user-select: none;
+}
+
+.apple::before {
+    content: '🍎';
+    position: absolute;
+    font-size: 0.8em;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.apple:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.apple.selected {
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    transform: scale(1.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border: 3px solid #fff;
+}
+
+.apple.removing {
+    animation: removeApple 0.5s ease-out forwards;
+}
+
+@keyframes removeApple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.controls {
+    text-align: center;
+}
+
+#new-game-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+#new-game-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+#new-game-btn:active {
+    transform: translateY(0);
+}
+
+.game-status {
+    margin-top: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+    min-height: 25px;
+}
+
+.game-status.success {
+    color: #4ecdc4;
+}
+
+.game-status.error {
+    color: #ff6b6b;
+}
+
+/* 드래그 선택 영역 */
+.selection-box {
+    position: absolute;
+    border: 3px solid #667eea;
+    background: rgba(102, 126, 234, 0.15);
+    pointer-events: none;
+    z-index: 100;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+    transition: none;
+}
+

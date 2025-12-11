@@ -1,0 +1,16 @@
+.feed {
+  width: 100%;
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .feed-container {
+    gap: 0;
+  }
+}
+

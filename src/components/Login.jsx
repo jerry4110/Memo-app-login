@@ -13,13 +13,19 @@ function Login({ onSwitchToSignup }) {
     setError('')
     setLoading(true)
 
-    const result = await login(email, password)
-    
-    if (!result.success) {
-      setError(result.error)
+    try {
+      const result = await login(email, password)
+      
+      if (!result.success) {
+        setError(result.error || '로그인에 실패했습니다')
+        setLoading(false)
+      } else {
+        // 성공 시 자동으로 메모 화면으로 전환됨
+      }
+    } catch (err) {
+      setError('알 수 없는 오류가 발생했습니다')
+      setLoading(false)
     }
-    
-    setLoading(false)
   }
 
   return (

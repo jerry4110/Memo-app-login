@@ -14,7 +14,10 @@ function App() {
   // 사용자가 로그인하면 메모 불러오기
   useEffect(() => {
     if (user) {
+      console.log('✅ 사용자 로그인 확인, 메모 불러오기:', user.username)
       fetchMemos()
+    } else {
+      console.log('⏳ 사용자 없음, 인증 화면 표시 중')
     }
   }, [user])
 
@@ -41,6 +44,8 @@ function App() {
   if (!user) {
     return <Auth />
   }
+
+  // user가 있으면 메모 화면 표시
 
   // 새 메모 생성
   const handleNewMemo = async () => {

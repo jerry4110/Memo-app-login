@@ -11,7 +11,15 @@ const app = express()
 const PORT = process.env.PORT || 3001
 
 // 미들웨어
-app.use(cors())
+app.use(cors({
+  origin: [
+    'https://memo-app-login.vercel.app',
+    'https://memo-app-login-*.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000'
+  ],
+  credentials: true
+}))
 app.use(express.json())
 
 // 데이터베이스 초기화

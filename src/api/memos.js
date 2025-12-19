@@ -1,10 +1,11 @@
 import axios from 'axios'
+import { API_URL } from '../config/api.js'
 
-const API_URL = 'http://localhost:3001/api/memos'
+const MEMOS_API_URL = `${API_URL}/memos`
 
 // axios 인스턴스 생성
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: MEMOS_API_URL,
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
   }
